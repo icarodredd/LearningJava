@@ -1,8 +1,14 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -16,9 +22,14 @@ public class Main {
 
 		};
 		persons.sort(comp);
-		for (Person item : persons) {
-			System.out.println(item);
-		}
+
+		// Function
+		Function<Person, String> upCase = p -> p.getName().toUpperCase();
+		List<String> personUp = persons.stream().map(upCase).collect(Collectors.toList());
+		personUp.forEach(p -> System.out.println(p));
+
+		// Predicate
+		Predicate<Person> pred = p -> p.getName().equals("Jõao");
 
 	}
 
